@@ -100,7 +100,7 @@ class LlavaInsturctionArguments(TrainingArguments):
         metadata={"help": "trl collator에서 사용되는 template 값."},
     )
     vision_feature_select_strategy: str = field(
-        default="defualt",
+        default="default",
         metadata={"help": "vision_feature_select_strategy에 사용되는 값, default, full 둘중에 하나만 고르셈."},
     )
     attn_implementation: str = field(
@@ -156,8 +156,8 @@ def main(train_args: LlavaInsturctionArguments) -> None:
                 conversations,
                 tokenize=False,
                 img_token=processor.image_token,
-                sot_token=train_args.sot_token,
-                eot_token=train_args.eot_token,
+                sot_token="<start_of_turn>",
+                eot_token="<end_of_turn>",
             )
 
             outputs = processor(text=text, images=image, return_tensors="np")
@@ -315,7 +315,7 @@ def main(train_args: LlavaInsturctionArguments) -> None:
             ):
                 raise ValueError("이거 instruction_template이 formated_instruct에 포함되어 있지 않음. 다시 설정하셈")
         elif sample_dataset is None:
-            logger.warn("train, valid, test데이터가 전혀 없는 상태인데 확인 한번 해봐.")
+            logger.warning("train, valid, test데이터가 전혀 없는 상태인데 확인 한번 해봐.")
 
         return (train_dataset, valid_dataset, test_dataset)
 
