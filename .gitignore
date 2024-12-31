@@ -3,3 +3,6 @@ __pycache__
 .bash_history
 .vscode-server
 .python_history
+log
+qwen2_vl_instruct_post_train.py
+w

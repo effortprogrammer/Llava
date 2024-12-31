@@ -369,7 +369,7 @@ def main(train_args: LlavaInstructionArguments) -> None:
         attn_implementation=train_args.attn_implementation,
         vision_feature_select_strategy=train_args.vision_feature_select_strategy,
     )
-    config.text_config.use_cache = False
+    # config.text_config.use_cache = False
     model = LlavaForConditionalGeneration.from_pretrained(model_name_or_path, config=config)
     processor = LlavaProcessor.from_pretrained(
         model_name_or_path,
